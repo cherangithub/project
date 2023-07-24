@@ -10,7 +10,6 @@ jobs:
     runs-on: 
       - self-hosted
       - label-1
-      - label-2
       
 
     steps:
