@@ -14,11 +14,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Deploy ConfigMaps and Secrets
-        run: |
-          kubectl apply -f configmap-secrets/configmap.yaml
-          kubectl apply -f configmap-secrets/secret.yaml
-
       - name: Deploy api-server Service and Deployment
         run: |
           kubectl apply -f services/apiserver-service.yaml
