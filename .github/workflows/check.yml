@@ -9,6 +9,7 @@ jobs:
   deploy:
     runs-on: 
       - self-hosted
+      - label-1
       
 
     steps:
