@@ -1,0 +1,57 @@
+name: Deploy to Kubernetes
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: 
+      - self-hosted
+      
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy ConfigMaps and Secrets
+        run: |
+          kubectl apply -f configmap-secrets/configmap.yaml
+          kubectl apply -f configmap-secrets/secret.yaml
+
+      - name: Deploy api-server Service and Deployment
+        run: |
+          kubectl apply -f services/apiserver-service.yaml
+          kubectl apply -f deployments/api-server-deployment.yaml
+
+      - name: Deploy ai Service and Deployment
+        run: |
+          kubectl apply -f services/ai-service.yaml
+          kubectl apply -f deployments/ai-deployment.yaml
+
+      - name: Deploy dataserver Service and Deployment
+        run: |
+          kubectl apply -f services/dataserver-service.yaml
+          kubectl apply -f deployments/dataserver-deployment.yaml
+
+      - name: Deploy metrics Service and Deployment
+        run: |
+          kubectl apply -f services/metrics-service.yaml
+          kubectl apply -f deployments/metrics-deployment.yaml
+
+      - name: Deploy provisioner Service and Deployment
+        run: |
+          kubectl apply -f services/provisioner-service.yaml
+          kubectl apply -f deployments/provisioner-deployment.yaml
+
+      - name: Deploy runner Service and Deployment
+        run: |
+          kubectl apply -f services/runner-service.yaml
+          kubectl apply -f deployments/runner-deployment.yaml
+
+      - name: Deploy ui Service and Deployment
+        run: |
+          kubectl apply -f services/ui-service.yaml
+          kubectl apply -f deployments/ui-deployment.yaml
+

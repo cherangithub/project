@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: default
+  name: rt-configmap
+  labels:
+    app: postgres
+data:
+  NOTIFICATION_URL: "http://localhost:9002/api/v1/send-notification"
+  PORT: "3000"
+  APPLICATION_HOST: "http://localhost:8080"
+  CAPTCHA_KEY: "6Lc6BAAAAAAAAChqRbQZcn_yyyyyyyyyyyyyyyyy"
+  WEBHOOK: "a834c2ecc3c494323b6fb5a7a7c4223c-1784557950.us-east-1.elb.amazonaws.com"
+  SES_REGION: "ap-south-1"
+  SES_EMAIL_FROM: "naveen.vasapalli@buildbot.tech"
+  SES_CONFIG_SET_NAME: "default"
+  APP_PORT: "4000"
+  LOG_LEVEL: " "
+  CP_MIN_SIZE: "20"
+  CP_MAX_SIZE: "50"
+  DB_HOST: "postgresql"
+  DB_PORT: "5432"
+  MQTT_HOST: "ws://65.0.175.28/mqtt"
+  MQTT_PORT: "8083"
+  MQTT_REGISTER_TOPIC: "rtagent/register/#"
+  MQTT_METRICS_TOPIC: "/rtagent/metrics/#"
+  MQTT_CLIENT_ID: 
+  MQTT_CLEAN: " "
+  TLS_ENABLE: "false"
+  MQTT_TLS_HOST: " "
+  MQTT_TLS_PORT: " "
+  TLS_CERT: " "
+  TLS_KEY: " "
+  TLS_CA: " "
+  JWT_PRIVATE_KEY: " "
+  ACTION_API_ACCESS_KEY: " "
+  ACTION_API_SECRET_KEY: " "
+  EXPIRY_LIMIT: " "
+  BY_PASS_AUTHENTICATION: "true"

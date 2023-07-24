@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ai
+  template:
+    metadata:
+      labels:
+        app: ai
+    spec:
+      containers:
+        - name: ai
+          image: 988020867216.dkr.ecr.us-east-1.amazonaws.com/request-thunder/ai:v1.0.0
+          ports:
+            - containerPort: 80

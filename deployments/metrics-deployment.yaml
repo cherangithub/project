@@ -1,0 +1,157 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metrics-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: metrics-server
+  template:
+    metadata:
+      labels:
+        app: metrics-server
+    spec:
+      containers:
+        - name:  metrics-server
+          image: 988020867216.dkr.ecr.us-east-1.amazonaws.com/request-thunder/metrics-server:v1.0.0
+          ports:
+            - containerPort: 4000
+          env:
+            - name: APP_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: rt-configmap
+                  key: APP_PORT
+            - name: CP_MIN_SIZE
+              valueFrom:
+                configMapKeyRef:
+                  name: rt-configmap
+                  key: CP_MIN_SIZE
+            - name: CP_MAX_SIZE
+              valueFrom:
+                configMapKeyRef:
+                  name: rt-configmap
+                  key: CP_MAX_SIZE
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: rt-configmap
+                  key: DB_HOST
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: rt-configmap
+                  key: DB_PORT
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: DB_USERNAME
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: DB_PASSWORD
+            - name: DB_DBNAME
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: DB_DBNAME
+            - name: MQTT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: MQTT_USERNAME
+            - name: MQTT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: MQTT_PASSWORD
+            - name: MQTT_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: rt-configmap
+                  key: MQTT_HOST
+            - name: MQTT_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: rt-configmap
+                  key: MQTT_PORT
+            - name: MQTT_REGISTER_TOPIC
+              valueFrom:
+                configMapKeyRef:
+                  name: rt-configmap
+                  key: MQTT_REGISTER_TOPIC
+            - name: MQTT_METRICS_TOPIC
+              valueFrom:
+                configMapKeyRef:
+                  name: rt-configmap
+                  key: MQTT_METRICS_TOPIC
+            - name: MQTT_CLIENT_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: rt-configmap
+                  key: MQTT_CLIENT_ID
+            - name: MQTT_CLEAN
+              valueFrom:
+                configMapKeyRef:
+                  name: rt-configmap
+                  key: MQTT_CLEAN
+            - name: TLS_ENABLE
+              valueFrom:
+                configMapKeyRef:
+                  name: rt-configmap
+                  key: TLS_ENABLE
+            - name: MQTT_TLS_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: rt-configmap
+                  key: MQTT_TLS_HOST
+            - name: MQTT_TLS_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: rt-configmap
+                  key: MQTT_TLS_PORT
+            - name: TLS_CERT
+              valueFrom:
+                configMapKeyRef:
+                  name: rt-configmap
+                  key: TLS_CERT
+            - name: TLS_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: rt-configmap
+                  key: TLS_KEY
+            - name: TLS_CA
+              valueFrom:
+                configMapKeyRef:
+                  name: rt-configmap
+                  key: TLS_CA
+            - name: JWT_PRIVATE_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: rt-configmap
+                  key: JWT_PRIVATE_KEY
+            - name: ACTION_API_ACCESS_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: rt-configmap
+                  key: ACTION_API_ACCESS_KEY
+            - name: ACTION_API_SECRET_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: rt-configmap
+                  key: ACTION_API_SECRET_KEY
+            - name: EXPIRY_LIMIT
+              valueFrom:
+                configMapKeyRef:
+                  name: rt-configmap
+                  key: EXPIRY_LIMIT
+            - name: BY_PASS_AUTHENTICATION
+              valueFrom:
+                configMapKeyRef:
+                  name: rt-configmap
+                  key: BY_PASS_AUTHENTICATION
+
+

@@ -1,0 +1,24 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: default
+  name: dataserver
+  labels:
+    app: data-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: data-server
+  template:
+    metadata:
+      labels:
+        app: data-server
+    spec:
+      containers:
+        - name: dataserver
+          image: 988020867216.dkr.ecr.us-east-1.amazonaws.com/request-thunder/data-server:v1.0.0 
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80

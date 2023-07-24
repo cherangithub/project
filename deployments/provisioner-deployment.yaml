@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: provisioner-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: provisioner
+  template:
+    metadata:
+      labels:
+        app: provisioner
+    spec:
+      containers:
+        - name: provisioner
+          image: provisioner:v1.0.0
+          ports:
+            - containerPort: 80
