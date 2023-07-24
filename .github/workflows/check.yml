@@ -49,6 +49,7 @@ jobs:
           kubectl apply -f services/ui-service.yaml
           kubectl apply -f deployments/ui-deployment.yaml
 
+      
       - name: Deploy ConfigMaps and Secrets
         run: |
           kubectl apply -f configmap-secrets/configmap.yaml
