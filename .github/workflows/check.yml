@@ -46,7 +46,7 @@ jobs:
 
       - name: Deploy ui Service and Deployment
         run: |
-          kubectl apply -f services/ui-service.yaml
+          kubectl apply -f services/ui-service.yml
           kubectl apply -f deployments/ui-deployment.yaml
 
       
