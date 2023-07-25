@@ -31,10 +31,6 @@ jobs:
 
       - name: Update Kubernetes deployments
         run: |
+          echo "Deploying image with tag: $IMAGE_TAG"
           kubectl set image deployment apiserver api-server=$ECR_REGISTRY/github:$IMAGE_TAG -n default
-      #     kubectl set image deployment runner-deployment runner=$ECR_REGISTRY/runner:$IMAGE_TAG -n default     
-      #     kubectl set image deployment ai-deployment ai=$ECR_REGISTRY/ai:$IMAGE_TAG -n default
-      #     kubectl set image deployment dataserver dataserver=$ECR_REGISTRY/data-server:$IMAGE_TAG -n default
-      #     kubectl set image deployment metrics-deployment metrics-server=$ECR_REGISTRY/metric-server:$IMAGE_TAG -n default
-      #     kubectl set image deployment provisioner-deployment provisioner=$ECR_REGISTRY/provisioner:$IMAGE_TAG -n default
-      #     kubectl set image deployment ui-deploy ui=$ECR_REGISTRY/ui:$IMAGE_TAG -n defaul
+      
