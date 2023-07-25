@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ai-deployment
+  name: ai-deployments
 spec:
   replicas: 1
   selector:
