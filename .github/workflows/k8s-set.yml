@@ -1,4 +1,4 @@
-name: update image work flow
+name: update image work flows
 
 on:
   push:
@@ -27,7 +27,7 @@ jobs:
 
       - name: Login to Amazon ECR
         id: login-ecr
-        run: echo $(aws ecr get-login-password --region us-east-1) | docker login --username AWS --password-stdin $ECR_REGISTRY
+        run: echo $(aws ecr get-login-password --region ap-south-1) | docker login --username AWS --password-stdin $ECR_REGISTRY
 
       - name: Update Kubernetes deployments
         run: |
