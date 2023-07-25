@@ -7,7 +7,7 @@ on:
       - devops
 
 env:
-  ECR_REGISTRY: 988020867216.dkr.ecr.us-east-1.amazonaws.com/request-thunder
+  ECR_REGISTRY: 614855231526.dkr.ecr.ap-south-1.amazonaws.com/github
   IMAGE_TAG: ${{ github.sha }}
 
 jobs:
@@ -29,12 +29,13 @@ jobs:
         id: login-ecr
         run: echo $(aws ecr get-login-password --region us-east-1) | docker login --username AWS --password-stdin $ECR_REGISTRY
 
-      - name: Update Kubernetes deployments
-        run: |
-          kubectl set image deployment apiserver api-server=$ECR_REGISTRY/api-server:$IMAGE_TAG -n default
-          kubectl set image deployment ai-deployment ai=$ECR_REGISTRY/ai:$IMAGE_TAG -n default
+       - name: Update Kubernetes deployments
+         run: |
+           kubectl set image deployment apiserver api-server=$ECR_REGISTRY/github:$IMAGE_TAG -n default
+      #     kubectl set image deployment runner-deployment runner=$ECR_REGISTRY/runner:$IMAGE_TAG -n default     
+      #     kubectl set image deployment ai-deployment ai=$ECR_REGISTRY/ai:$IMAGE_TAG -n default
       #     kubectl set image deployment dataserver dataserver=$ECR_REGISTRY/data-server:$IMAGE_TAG -n default
       #     kubectl set image deployment metrics-deployment metrics-server=$ECR_REGISTRY/metric-server:$IMAGE_TAG -n default
       #     kubectl set image deployment provisioner-deployment provisioner=$ECR_REGISTRY/provisioner:$IMAGE_TAG -n default
       #     kubectl set image deployment ui-deploy ui=$ECR_REGISTRY/ui:$IMAGE_TAG -n default
-      #     kubectl set image deployment runner-deployment runner=$ECR_REGISTRY/runner:$IMAGE_TAG -n default
+      
