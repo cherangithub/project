@@ -1,4 +1,4 @@
-name: update image work flow
+name: update image work flows
 
 on:
   push:
