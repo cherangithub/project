@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  ECR_REGISTRY: 614855231526.dkr.ecr.ap-south-1.amazonaws.com/github
+  # ECR_REGISTRY: 614855231526.dkr.ecr.ap-south-1.amazonaws.com/github
   IMAGE_TAG: ${{ github.sha }}
 
 jobs:
@@ -17,16 +17,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-south-1
+      # - name: Configure AWS credentials
+      #   uses: aws-actions/configure-aws-credentials@v1
+      #   with:
+      #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     aws-region: ap-south-1
 
-      - name: Login to Amazon ECR
-        id: login-ecr
-        run: echo $(aws ecr get-login-password --region ap-south-1) | docker login --username AWS --password-stdin $ECR_REGISTRY
+      # - name: Login to Amazon ECR
+      #   id: login-ecr
+      #   run: echo $(aws ecr get-login-password --region ap-south-1) | docker login --username AWS --password-stdin $ECR_REGISTRY
 
       - name: Update Kubernetes deployments
         run: |
