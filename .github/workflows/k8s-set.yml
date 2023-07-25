@@ -1,0 +1,40 @@
+name: update image work flow
+
+on:
+  push:
+    branches:
+      - main
+      - devops
+
+env:
+  ECR_REGISTRY: 988020867216.dkr.ecr.us-east-1.amazonaws.com/request-thunder
+  IMAGE_TAG: ${{ github.sha }}
+
+jobs:
+  deploy_kubernetes:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        run: echo $(aws ecr get-login-password --region us-east-1) | docker login --username AWS --password-stdin $ECR_REGISTRY
+
+      - name: Update Kubernetes deployments
+        run: |
+          kubectl set image deployment apiserver api-server=$ECR_REGISTRY/api-server:$IMAGE_TAG -n default
+          kubectl set image deployment ai-deployment ai=$ECR_REGISTRY/ai:$IMAGE_TAG -n default
+      #     kubectl set image deployment dataserver dataserver=$ECR_REGISTRY/data-server:$IMAGE_TAG -n default
+      #     kubectl set image deployment metrics-deployment metrics-server=$ECR_REGISTRY/metric-server:$IMAGE_TAG -n default
+      #     kubectl set image deployment provisioner-deployment provisioner=$ECR_REGISTRY/provisioner:$IMAGE_TAG -n default
+      #     kubectl set image deployment ui-deploy ui=$ECR_REGISTRY/ui:$IMAGE_TAG -n default
+      #     kubectl set image deployment runner-deployment runner=$ECR_REGISTRY/runner:$IMAGE_TAG -n default
