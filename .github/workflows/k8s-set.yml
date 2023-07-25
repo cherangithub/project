@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  # ECR_REGISTRY: 614855231526.dkr.ecr.ap-south-1.amazonaws.com/github
+  ECR_REGISTRY: 614855231526.dkr.ecr.ap-south-1.amazonaws.com/github
   IMAGE_TAG: ${{ github.sha }}
 
 jobs:
