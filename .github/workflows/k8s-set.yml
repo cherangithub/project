@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - devops
 
 env:
   ECR_REGISTRY: 614855231526.dkr.ecr.ap-south-1.amazonaws.com/github
@@ -32,5 +31,5 @@ jobs:
       - name: Update Kubernetes deployments
         run: |
           echo "Deploying image with tag: $IMAGE_TAG"
-          kubectl set image deployment apiserver api-server=$ECR_REGISTRY/github:$IMAGE_TAG -n default
+          kubectl set image deployment apiserver api-server=$ECR_REGISTRY:$IMAGE_TAG -n default
       
